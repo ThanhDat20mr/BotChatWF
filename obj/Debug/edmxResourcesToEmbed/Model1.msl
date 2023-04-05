@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ChatBotModelStoreContainer" CdmEntityContainer="ChatBotEntities">
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="ChatBotModel.sysdiagrams">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Answer">
+      <EntityTypeMapping TypeName="ChatBotModel.Answer">
+        <MappingFragment StoreEntitySet="Answer">
+          <ScalarProperty Name="maloai" ColumnName="maloai" />
+          <ScalarProperty Name="Bot" ColumnName="Bot" />
+          <ScalarProperty Name="Me" ColumnName="Me" />
+          <ScalarProperty Name="stt" ColumnName="stt" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Topic">
+      <EntityTypeMapping TypeName="ChatBotModel.Topic">
+        <MappingFragment StoreEntitySet="Topic">
+          <ScalarProperty Name="tenloai" ColumnName="tenloai" />
+          <ScalarProperty Name="maloai" ColumnName="maloai" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="History">
+      <EntityTypeMapping TypeName="ChatBotModel.History">
+        <MappingFragment StoreEntitySet="History">
+          <ScalarProperty Name="active" ColumnName="active" />
+          <ScalarProperty Name="administration" ColumnName="administration" />
+          <ScalarProperty Name="date" ColumnName="date" />
+          <ScalarProperty Name="username" ColumnName="username" />
+          <ScalarProperty Name="num" ColumnName="num" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Account">
+      <EntityTypeMapping TypeName="ChatBotModel.Account">
+        <MappingFragment StoreEntitySet="Account">
+          <ScalarProperty Name="administration" ColumnName="administration" />
+          <ScalarProperty Name="active" ColumnName="active" />
+          <ScalarProperty Name="style" ColumnName="style" />
+          <ScalarProperty Name="size" ColumnName="size" />
+          <ScalarProperty Name="phone" ColumnName="phone" />
+          <ScalarProperty Name="gender" ColumnName="gender" />
+          <ScalarProperty Name="age" ColumnName="age" />
+          <ScalarProperty Name="fullname" ColumnName="fullname" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="username" ColumnName="username" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

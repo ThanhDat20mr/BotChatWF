@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ChatBotModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityContainer Name="ChatBotEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+    <EntitySet Name="Answer" EntityType="ChatBotModel.Answer" />
+    <EntitySet Name="Topic" EntityType="ChatBotModel.Topic" />
+    <AssociationSet Name="FK__Answer__maloai__276EDEB3" Association="ChatBotModel.FK__Answer__maloai__276EDEB3">
+      <End Role="Topic" EntitySet="Topic" />
+      <End Role="Answer" EntitySet="Answer" />
+    </AssociationSet>
+    <EntitySet Name="History" EntityType="ChatBotModel.History" />
+    <EntitySet Name="Account" EntityType="ChatBotModel.Account" />
+  </EntityContainer>
+  <EntityType Name="Answer">
+    <Key>
+      <PropertyRef Name="stt" />
+    </Key>
+    <Property Name="stt" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Me" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Bot" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="maloai" Type="Int32" />
+    <NavigationProperty Name="Topic" Relationship="ChatBotModel.FK__Answer__maloai__276EDEB3" FromRole="Answer" ToRole="Topic" />
+  </EntityType>
+  <EntityType Name="Topic">
+    <Key>
+      <PropertyRef Name="maloai" />
+    </Key>
+    <Property Name="maloai" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="tenloai" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Answer" Relationship="ChatBotModel.FK__Answer__maloai__276EDEB3" FromRole="Topic" ToRole="Answer" />
+  </EntityType>
+  <Association Name="FK__Answer__maloai__276EDEB3">
+    <End Type="ChatBotModel.Topic" Role="Topic" Multiplicity="0..1" />
+    <End Type="ChatBotModel.Answer" Role="Answer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Topic">
+        <PropertyRef Name="maloai" />
+      </Principal>
+      <Dependent Role="Answer">
+        <PropertyRef Name="maloai" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="History">
+    <Key>
+      <PropertyRef Name="num" />
+    </Key>
+    <Property Name="num" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="date" Type="DateTime" Precision="3" />
+    <Property Name="administration" Type="Boolean" />
+    <Property Name="active" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="Account">
+    <Key>
+      <PropertyRef Name="username" />
+    </Key>
+    <Property Name="username" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="password" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="fullname" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="age" Type="Int32" />
+    <Property Name="gender" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="phone" Type="Int32" />
+    <Property Name="size" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="style" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="active" Type="Boolean" />
+    <Property Name="administration" Type="Boolean" />
+  </EntityType>
+</Schema>

@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ChatBotModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Account">
+    <Key>
+      <PropertyRef Name="username" />
+    </Key>
+    <Property Name="username" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="password" Type="varchar(max)" />
+    <Property Name="fullname" Type="nvarchar(max)" />
+    <Property Name="age" Type="int" />
+    <Property Name="gender" Type="nvarchar" MaxLength="50" />
+    <Property Name="phone" Type="int" />
+    <Property Name="size" Type="varchar(max)" />
+    <Property Name="style" Type="nvarchar(max)" />
+    <Property Name="active" Type="bit" />
+    <Property Name="administration" Type="bit" />
+  </EntityType>
+  <EntityType Name="Answer">
+    <Key>
+      <PropertyRef Name="stt" />
+    </Key>
+    <Property Name="stt" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Me" Type="nvarchar(max)" />
+    <Property Name="Bot" Type="nvarchar(max)" />
+    <Property Name="maloai" Type="int" />
+  </EntityType>
+  <EntityType Name="History">
+    <Key>
+      <PropertyRef Name="num" />
+    </Key>
+    <Property Name="num" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="username" Type="varchar" MaxLength="50" />
+    <Property Name="date" Type="datetime" />
+    <Property Name="administration" Type="bit" />
+    <Property Name="active" Type="bit" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="Topic">
+    <Key>
+      <PropertyRef Name="maloai" />
+    </Key>
+    <Property Name="maloai" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="tenloai" Type="nvarchar(max)" />
+  </EntityType>
+  <Association Name="FK__Answer__maloai__276EDEB3">
+    <End Role="Topic" Type="Self.Topic" Multiplicity="0..1" />
+    <End Role="Answer" Type="Self.Answer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Topic">
+        <PropertyRef Name="maloai" />
+      </Principal>
+      <Dependent Role="Answer">
+        <PropertyRef Name="maloai" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="ChatBotModelStoreContainer">
+    <EntitySet Name="Account" EntityType="Self.Account" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Answer" EntityType="Self.Answer" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="History" EntityType="Self.History" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Topic" EntityType="Self.Topic" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__Answer__maloai__276EDEB3" Association="Self.FK__Answer__maloai__276EDEB3">
+      <End Role="Topic" EntitySet="Topic" />
+      <End Role="Answer" EntitySet="Answer" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
